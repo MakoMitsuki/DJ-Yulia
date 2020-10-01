@@ -3,6 +3,7 @@ const { MessageEmbed } = require('discord.js');
 const ytdl = require('ytdl-core');
 const fs = require('fs');
 const { prefix } = require('../../config.json');
+const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
 
 module.exports = class MusicTriviaCommand extends Command {
   constructor(client) {
@@ -23,7 +24,7 @@ module.exports = class MusicTriviaCommand extends Command {
           key: 'numberOfSongs',
           prompt: 'What is the number of songs you want the quiz to have?',
           type: 'integer',
-          default: 5,
+          default: 6,
           max: 15
         }
       ]
@@ -110,7 +111,7 @@ module.exports = class MusicTriviaCommand extends Command {
               return;
             if (msg.content.startsWith(prefix)) return;
             // if user guessed song name
-            if (msg.content.toLowerCase() === queue[0].title.toLowerCase()) {
+            if (msg.content.toLowerCase().replace(regex, '') === queue[0].title.toLowerCase().replace(regex, '')) {
               if (songNameFound) return; // if song name already found
               songNameFound = true;
 
@@ -133,7 +134,7 @@ module.exports = class MusicTriviaCommand extends Command {
             }
             // if user guessed singer
             else if (
-              msg.content.toLowerCase() === queue[0].singer.toLowerCase()
+              msg.content.toLowerCase().replace(regex, '') === queue[0].singer.toLowerCase().replace(regex, '')
             ) {
               if (songSingerFound) return;
               songSingerFound = true;
