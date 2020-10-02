@@ -12,8 +12,11 @@ module.exports = class WhoMadeMeCommand extends Command {
   }
 
   run(message) {
-    message.say(
-      'Made by @michanpyon#0610!'
-    );
+    message.channel.send({embed: {
+      color: 3447003,
+      title: "DJ Yulia",
+      url: "https://github.com/MakoMitsuki/DJ-Yulia",
+      description: "Made by **Mika C** (@michanpyon#0610)"
+    }});
   }
 };

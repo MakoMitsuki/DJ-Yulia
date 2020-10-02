@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const { tenorAPI } = require("../config.json");
+const { tenorAPI } = require("../../config.json");
 const fs = require('fs');
 const { Command } = require('discord.js-commando');
 
