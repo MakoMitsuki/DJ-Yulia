@@ -56,6 +56,16 @@
       "title": "stressed out"
     },
     {
+      "url": "https://www.youtube.com/watch?v=XaKr98ktoxU",
+      "singer": "Snow Patrol",
+      "title": "Chasing Cars"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=rkBvhnri5s0",
+      "singer": "The Fray",
+      "title": "How To Save A Life"
+    },
+    {
       "url": "https://www.youtube.com/watch?v=fLexgOxsZu0",
       "singer": "bruno mars",
       "title": "the lazy song"
@@ -296,9 +306,14 @@
       "title": "PONPONPON"
     },
     {
-      "url": "https://www.youtube.com/watch?v=AEB6ibtdPZc",
+      "url": "https://www.youtube.com/watch?v=V0hvzjyuZ5k",
       "singer": "Paramore",
       "title": "Hard Times"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=t4z2NghfBvQ",
+      "singer": "Sia",
+      "title": "The Greatest"
     },
     {
       "url": "https://www.youtube.com/watch?v=uCRT8IItGpw",
@@ -624,6 +639,11 @@
       "url": "https://www.youtube.com/watch?v=0i1o9lSUuI8",
       "singer": "Taylor Swift",
       "title": "Delicate"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=iaJ4wzDO5fA",
+      "singer": "Ellie Goulding",
+      "title": "Lights"
     },
     {
       "url": "https://www.youtube.com/watch?v=2RAI2IEtbFs",
