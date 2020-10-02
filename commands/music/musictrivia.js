@@ -12,7 +12,7 @@ module.exports = class MusicTriviaCommand extends Command {
       memberName: 'music-trivia',
       aliases: ['music-quiz', 'start-quiz'],
       group: 'music',
-      description: 'Engage in a music quiz with your friends!',
+      description: 'Engage in a music quiz with your friends! You can specify how many songs will be asked in this round by typing ``?music-trivia <number of songs>``',
       guildOnly: true,
       clientPermissions: ['SPEAK', 'CONNECT'],
       throttling: {

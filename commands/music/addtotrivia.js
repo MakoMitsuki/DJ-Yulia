@@ -1,9 +1,8 @@
 const { Command } = require('discord.js-commando');
-const { MessageEmbed } = require('discord.js');
 const Youtube = require('simple-youtube-api');
-const ytdl = require('ytdl-core');
 const { youtubeAPI } = require('../../config.json');
 const youtube = new Youtube(youtubeAPI);
+const fs = require('fs');
 
 module.exports = class AddToTriviaCommand extends Command {
   constructor(client) {
@@ -12,7 +11,7 @@ module.exports = class AddToTriviaCommand extends Command {
       aliases: ['add-to-trivia', 'add-song-to-trivia'],
       memberName: 'addtotrivia',
       group: 'music',
-      description: "Contribute a song to the Music Trivia library!",
+      description: "Contribute a song to the Music Trivia library! Type ``?addtotrivia <youtubelink>``",
       throttling: {
         usages: 2,
         duration: 5
@@ -23,42 +22,55 @@ module.exports = class AddToTriviaCommand extends Command {
           prompt: 'What is the link to the song you want to add?',
           type: 'string',
           validate: function(query) {
-            return query.length > 0 && query.length < 200;
+            return query.match(/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+/);
           }
+        },
+        {
+          key: 'nartist',
+          prompt: 'Who is the artist to the song you want to add?',
+          type: 'string',
+        }, {
+          key: 'nsongname',
+          prompt: 'What is the name of the song you want to add?',
+          type: 'string',
         }
       ]
     });
   }
 
-  async run(message) {
+  async run(message, { link, nartist, nsongname }) {
     // check if trivia is running
     if (message.guild.triviaData.isTriviaRunning == true) {
       message.say('Please try after the trivia has ended');
       return;
     }
 
-    // fetch link array from txt file
-    const jsonSongs = fs.readFileSync(
+    // error message if not a valid youtube link
+    if (!link.match(/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+/)) {
+      message.say("The link you are trying to use may be an invalid link or not a YouTube link. Try again!");
+      return;
+    }
+    
+    console.log(link + nartist + nsongname);
+
+    // fetch array from txt file
+    var jsonSongs = fs.readFileSync(
       'resources/music/musictrivia.json',
       'utf8'
     );
-    var videoDataArray = JSON.parse(jsonSongs).songs;
+    var videoDataArray = JSON.parse(jsonSongs);
 
-    // check youtube url
-    if (query.match(/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+/)) {
-      query = query
-        .replace(/(>|<)/gi, '')
-        .split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-    }
-    const id = query[2].split(/[^0-9a-z_\-]/i)[0];
-      const video = await youtube.getVideoByID(id).catch(function() {
-        message.say('There was a problem getting the video you provided!');
-        return;
-      });
+    videoDataArray.songs.push({
+      url: link,
+      singer: nartist,
+      title: nsongname
+    });
+    jsonSongs = JSON.stringify(videoDataArray);
 
-      if (video.raw.snippet.liveBroadcastContent === 'live') {
-        return message.say("Live streams are not allowed!");
-      }
-    }
+    var w = fs.writeFileSync('resources/music/musictrivia.json', jsonSongs);
+
+    message.say("**" + nartist + " - " + nsongname + "** has been added to the Music Trivia Library! ");
+
+  }
 
 };
