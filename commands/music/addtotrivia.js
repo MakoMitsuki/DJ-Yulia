@@ -3,6 +3,7 @@ const Youtube = require('simple-youtube-api');
 const { youtubeAPI } = require('../../config.json');
 const youtube = new Youtube(youtubeAPI);
 const fs = require('fs');
+const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
 
 module.exports = class AddToTriviaCommand extends Command {
   constructor(client) {
@@ -51,7 +52,7 @@ module.exports = class AddToTriviaCommand extends Command {
       return;
     }
     
-    console.log(link + nartist + nsongname);
+    // DEBUG: console.log(link + nartist + nsongname);
 
     // fetch array from txt file
     var jsonSongs = fs.readFileSync(
@@ -60,17 +61,30 @@ module.exports = class AddToTriviaCommand extends Command {
     );
     var videoDataArray = JSON.parse(jsonSongs);
 
-    videoDataArray.songs.push({
-      url: link,
-      singer: nartist,
-      title: nsongname
-    });
-    jsonSongs = JSON.stringify(videoDataArray);
+    // check if its already in the list by title and song
+    if (AddToTriviaCommand.runCheck(videoDataArray.songs, nartist, nsongname))
+    {
+      videoDataArray.songs.push({
+        url: link,
+        singer: nartist,
+        title: nsongname
+      });
+      jsonSongs = JSON.stringify(videoDataArray);
+  
+      var w = fs.writeFileSync('resources/music/musictrivia.json', jsonSongs);
+  
+      message.say("**" + nartist + " - " + nsongname + "** has been added to the Music Trivia Library! ");
+    }
+    else {
+      message.say("**" + nartist + " - " + nsongname + "** is already in the Music Trivia Library! ");
+    }
 
-    var w = fs.writeFileSync('resources/music/musictrivia.json', jsonSongs);
+  }
 
-    message.say("**" + nartist + " - " + nsongname + "** has been added to the Music Trivia Library! ");
+  static async runCheck (source, a, s) {
+    
 
+    return true;
   }
 
 };

@@ -212,7 +212,7 @@
     },
     {
       "url": "https://www.youtube.com/watch?v=BDX8eTORFCo",
-      "singer": "Spice Girl",
+      "singer": "Spice Girls",
       "title": "Wannabe"
     },
     {
@@ -1271,11 +1271,6 @@
       "title": "Juice"
     },
     {
-      "url": "https://www.youtube.com/watch?v=BboMpayJomw",
-      "singer": "Billie Eilish",
-      "title": "No Time To Die"
-    },
-    {
       "url": "https://www.youtube.com/watch?v=3JWTaaS7LdU",
       "singer": "Whitney Houston",
       "title": "I Will Always Love You"
@@ -1334,11 +1329,6 @@
       "url": "https://www.youtube.com/watch?v=kTHNpusq654",
       "singer": "katy perry",
       "title": "hot n cold"
-    },
-    {
-      "url": "https://www.youtube.com/watch?v=CevxZvSJLk8",
-      "singer": "katy perry",
-      "title": "roar"
     },
     {
       "url": "https://www.youtube.com/watch?v=1k8craCGpgs&ab",
@@ -1684,6 +1674,61 @@
       "url": "https://www.youtube.com/watch?v=_mVW8tgGY_w",
       "singer": "Beethoven",
       "title": "Fur Elise"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=J91ti_MpdHA",
+      "singer": "Alicia Keys",
+      "title": "Girl on Fire"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Y4JfPlry-iQ",
+      "singer": "Fifth Harmony",
+      "title": "BOSS"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=8yvGCAvOAfM",
+      "singer": "Thirty seconds to mars",
+      "title": "The Kill"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=9Ht5RZpzPqw&ab_channel=blink182VEVO",
+      "singer": "Blink 182",
+      "title": "All the small things"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=5GL9JoH4Sws",
+      "singer": "Fifth Harmony",
+      "title": "Work from Home"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=otCpCn0l4Wo",
+      "singer": "MC Hammer",
+      "title": "U Can't Touch This"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=JjPIOuFtWAI",
+      "singer": "30 Seconds to mars",
+      "title": "The kill"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=_EBvXpjudf8",
+      "singer": "The Runaways",
+      "title": "Cherry Bomb"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=7wfYIMyS_dI",
+      "singer": "Enya",
+      "title": "Only Time"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=LTrk4X9ACtw",
+      "singer": "Enya",
+      "title": "Orinoco Flow"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=8DDHulO485k",
+      "singer": "Enya",
+      "title": "Echoes In Rain"
     }
   ]
 }
