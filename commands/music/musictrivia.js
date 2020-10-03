@@ -24,7 +24,7 @@ module.exports = class MusicTriviaCommand extends Command {
           key: 'numberOfSongs',
           prompt: 'What is the number of songs you want the quiz to have?',
           type: 'integer',
-          default: 6,
+          default: 10,
           max: 15
         }
       ]
@@ -50,6 +50,10 @@ module.exports = class MusicTriviaCommand extends Command {
       videoDataArray,
       numberOfSongs
     ); // get x random urls
+
+    console.log("numberOfSongs: " + numberOfSongs);
+    console.log("randvlength: " + randomXVideoLinks.length);
+
     // create and send info embed
     const infoEmbed = new MessageEmbed()
       .setColor('#ff7373')
@@ -61,7 +65,7 @@ module.exports = class MusicTriviaCommand extends Command {
     message.say(infoEmbed);
     // init quiz queue
     // turn each vid to song object
-
+       
     for (let i = 0; i < randomXVideoLinks.length; i++) {
       const song = {
         url: randomXVideoLinks[i].url,
@@ -69,6 +73,7 @@ module.exports = class MusicTriviaCommand extends Command {
         title: randomXVideoLinks[i].title,
         voiceChannel
       };
+      console.log(randomXVideoLinks[i].singer + " " + randomXVideoLinks[i].title);
       message.guild.triviaData.triviaQueue.push(song);
     }
     const channelInfo = Array.from(
@@ -86,6 +91,7 @@ module.exports = class MusicTriviaCommand extends Command {
 
   static async playQuizSong(queue, message) {
     var classThis = this;
+    var songNum = 1;
     queue[0].voiceChannel.join().then(function(connection) {
       const dispatcher = connection
         .play(
@@ -99,6 +105,7 @@ module.exports = class MusicTriviaCommand extends Command {
           dispatcher.setVolume(message.guild.musicData.volume);
           let songNameFound = false;
           let songSingerFound = false;
+          console.log("Song playing");
 
           const filter = msg =>
             message.guild.triviaData.triviaScore.has(msg.author.username);

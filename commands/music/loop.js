@@ -7,7 +7,7 @@ module.exports = class LoopCommand extends Command {
       group: 'music',
       memberName: 'loop',
       guildOnly: true,
-      description: 'Loop the currently playing song'
+      description: 'Loop the currently playing song. *Stop the loop by typing ``?loop`` again*'
     });
   }
 
