@@ -82,7 +82,19 @@ module.exports = class AddToTriviaCommand extends Command {
   }
 
   static async runCheck (source, a, s) {
+    /*var results = [];
+    var titleToAdd = s.toLowerCase().replace(regex, '');
+    var artistToAdd = a.toLowerCase().replace(regex, '');
+
+    results = source.filter(function(entry) {
+      return (entry.singer.toLowerCase().replace(regex, '').indexOf(artistToAdd) !== -1) && (entry.title.toLowerCase().replace(regex, '').indexOf(titleToAdd) !== -1);
+    });
     
+    console.log(results);
+    if (results === undefined || results.length == 0) {
+      return true;
+    }
+    return false;*/
 
     return true;
   }
