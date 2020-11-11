@@ -48,6 +48,6 @@ A small personal Discord bot like [MEE6](https://mee6.xyz/) that lets you listen
 - **kick:** Kicks a tagged member
 - **prune:** Delete up to 99 recent messages
 
-#### Utility
+### Utility
 - **help:** Displays a list of available commands, or detailed information for a specified command.
 - **ping:** Checks the bot's ping to the Discord server.
