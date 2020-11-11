@@ -1,9 +1,5 @@
 const { Command } = require('discord.js-commando');
-const Youtube = require('simple-youtube-api');
-const { youtubeAPI } = require('../../config.json');
-const youtube = new Youtube(youtubeAPI);
 const fs = require('fs');
-const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
 const Discord = require('discord.js');
 
 module.exports = class AddToTriviaCommand extends Command {
@@ -62,9 +58,7 @@ module.exports = class AddToTriviaCommand extends Command {
     );
     var videoDataArray = JSON.parse(jsonSongs);
 
-    // check if its already in the list by title and song
-    if (AddToTriviaCommand.runCheck(videoDataArray.songs, nartist, nsongname))
-    {
+
       videoDataArray.songs.push({
         url: link,
         singer: nartist,
@@ -81,29 +75,7 @@ module.exports = class AddToTriviaCommand extends Command {
         .setDescription("**" + nartist + " - " + nsongname + "**")
         .setTimestamp();
       message.channel.send(videoEmbed);
-    }
-    else {
-      message.say("**" + nartist + " - " + nsongname + "** is already in the Music Trivia Library! ");
-    }
 
-  }
-
-  static async runCheck (source, a, s) {
-    /*var results = [];
-    var titleToAdd = s.toLowerCase().replace(regex, '');
-    var artistToAdd = a.toLowerCase().replace(regex, '');
-
-    results = source.filter(function(entry) {
-      return (entry.singer.toLowerCase().replace(regex, '').indexOf(artistToAdd) !== -1) && (entry.title.toLowerCase().replace(regex, '').indexOf(titleToAdd) !== -1);
-    });
-    
-    console.log(results);
-    if (results === undefined || results.length == 0) {
-      return true;
-    }
-    return false;*/
-
-    return true;
   }
 
 };
