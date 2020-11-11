@@ -1,5 +1,5 @@
 # DJ-Yulia
-A small personal Discord bot like [MEE6]https://mee6.xyz/) that lets you listen to music on your Discord channels, as well as play a music trivia quiz amongst other neat commands. Utilizes the Youtube, Tenor and News APIs.
+A small personal Discord bot like [MEE6](https://mee6.xyz/) that lets you listen to music on your Discord channels, as well as play a music trivia quiz amongst other neat commands. Utilizes the Youtube, Tenor and News APIs.
 
 ## Commands
 
