@@ -25,7 +25,7 @@ module.exports = class MusicTriviaCommand extends Command {
           prompt: 'What is the number of songs you want the quiz to have?',
           type: 'integer',
           default: 10,
-          max: 15
+          max: 20
         }
       ]
     });
@@ -251,11 +251,10 @@ module.exports = class MusicTriviaCommand extends Command {
               })
             );
             const embed = new MessageEmbed()
-              .setColor('#ff7373')
-              .setTitle(`Music Quiz Results:`)
-              .setDescription(
-                classThis.getLeaderBoard(Array.from(sortedScoreMap.entries()))
-              );
+              .setColor('#81b214')
+              .setTitle(`Music Quiz Over!`)
+              .setDescription(classThis.getLeaderBoard(Array.from(sortedScoreMap.entries())))
+              .setTimestamp();
             message.channel.send(embed);
             message.guild.musicData.isPlaying = false;
             message.guild.triviaData.isTriviaRunning = false;
@@ -294,7 +293,7 @@ module.exports = class MusicTriviaCommand extends Command {
     if (arr.length > 1) {
       for (let i = 1; i < arr.length; i++) {
         leaderBoard =
-          leaderBoard + `\n\n   ${i + 1}: ${arr[i][0]}: ${arr[i][1]}  points`;
+          leaderBoard + `\n\n  **# ${i + 1}:** ${arr[i][0]}: ${arr[i][1]}  points`;
       }
     }
     return leaderBoard;

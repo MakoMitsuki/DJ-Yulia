@@ -4,6 +4,7 @@ const { youtubeAPI } = require('../../config.json');
 const youtube = new Youtube(youtubeAPI);
 const fs = require('fs');
 const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
+const Discord = require('discord.js');
 
 module.exports = class AddToTriviaCommand extends Command {
   constructor(client) {
@@ -20,7 +21,7 @@ module.exports = class AddToTriviaCommand extends Command {
       args: [
         {
           key: 'link',
-          prompt: 'What is the link to the song you want to add?',
+          prompt: '**What is the __LINK__ to the song you want to add?**',
           type: 'string',
           validate: function(query) {
             return query.match(/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+/);
@@ -28,11 +29,11 @@ module.exports = class AddToTriviaCommand extends Command {
         },
         {
           key: 'nartist',
-          prompt: 'Who is the artist to the song you want to add?',
+          prompt: '**Who is the __ARTIST__ to the song you want to add?**',
           type: 'string',
         }, {
           key: 'nsongname',
-          prompt: 'What is the name of the song you want to add?',
+          prompt: '**What is the __NAME__ of the song you want to add?**',
           type: 'string',
         }
       ]
@@ -72,8 +73,14 @@ module.exports = class AddToTriviaCommand extends Command {
       jsonSongs = JSON.stringify(videoDataArray);
   
       var w = fs.writeFileSync('resources/music/musictrivia.json', jsonSongs);
-  
-      message.say("**" + nartist + " - " + nsongname + "** has been added to the Music Trivia Library! ");
+
+      const videoEmbed = new Discord.MessageEmbed()
+        .setThumbnail('https://cdn.iconscout.com/icon/free/png-256/music-859-459997.png')
+        .setColor('#0099ff')
+        .setTitle("Song added to Music Trivia!")
+        .setDescription("**" + nartist + " - " + nsongname + "**")
+        .setTimestamp();
+      message.channel.send(videoEmbed);
     }
     else {
       message.say("**" + nartist + " - " + nsongname + "** is already in the Music Trivia Library! ");
