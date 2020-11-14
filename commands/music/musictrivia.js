@@ -219,7 +219,7 @@ module.exports = class MusicTriviaCommand extends Command {
             )}: ${classThis.capitalize_Words(queue[0].title)}`;
 
             const embed = new MessageEmbed()
-              .setColor('#ff7373')
+              .setColor('#fa7f72')
               .setTitle(`The song was:  ${song}`)
               .setDescription(
                 classThis.getLeaderBoard(Array.from(sortedScoreMap.entries()))
@@ -252,6 +252,8 @@ module.exports = class MusicTriviaCommand extends Command {
             );
             const embed = new MessageEmbed()
               .setColor('#81b214')
+              .setThumbnail('https://cdn.iconscout.com/icon/free/png-256/music-859-459997.png')
+              .setAuthor('DJ Yulia')
               .setTitle(`Music Quiz Over!`)
               .setDescription(classThis.getLeaderBoard(Array.from(sortedScoreMap.entries())))
               .setTimestamp();
@@ -263,6 +265,19 @@ module.exports = class MusicTriviaCommand extends Command {
             message.guild.me.voice.channel.leave();
             return;
           }
+        })
+        .on('error', function() {
+          message.guild.triviaData.triviaQueue.length = 0;
+          message.guild.triviaData.wasTriviaEndCalled = true;
+          message.guild.triviaData.triviaScore.clear();
+          message.guild.musicData.songDispatcher.end();
+          let tee = new MessageEmbed()
+              .setColor('#FF0000')
+              .setAuthor('DJ Yulia')
+              .setTitle(`Error!`)
+              .setDescription(`There was an error with the music trivia song, so this round music trivia is being stopped. This is not supposed to happen! Contact michanpyon#0610 `)
+              .setTimestamp();
+          return tee;
         });
     });
   }

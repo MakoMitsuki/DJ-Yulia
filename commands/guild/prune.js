@@ -5,7 +5,7 @@ module.exports = class PruneCommand extends Command {
     super(client, {
       name: 'prune',
       aliases: ['delete-messages', 'bulk-delete'],
-      description: 'Delete up to 99 recent messages',
+      description: 'Delete up to 100 recent messages',
       group: 'guild',
       memberName: 'prune',
       guildOnly: true,
@@ -15,7 +15,7 @@ module.exports = class PruneCommand extends Command {
           key: 'deleteCount',
           prompt: 'How many messages do you want to delete?',
           type: 'integer',
-          validate: deleteCount => deleteCount < 100 && deleteCount > 0
+          validate: deleteCount => deleteCount <= 100 && deleteCount > 0
         }
       ]
     });
@@ -27,9 +27,13 @@ module.exports = class PruneCommand extends Command {
       .then(messages => message.say(`Deleted ${messages.size} messages`))
       .catch(e => {
         console.error(e);
-        return message.say(
-          'Something went wrong when trying to delete messages :('
-        );
+        let pem = new MessageEmbed()
+              .setColor('#FF0000')
+              .setAuthor('DJ Yulia')
+              .setTitle(`Error!`)
+              .setDescription(`Something went wrong when trying to delete messages! You are only allowed to delete up to 99 messages. Contact michanpyon#0610 if there are any other issues.`)
+              .setTimestamp();
+        return pem;
       });
   }
 };

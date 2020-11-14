@@ -69,10 +69,10 @@ module.exports = class AddToTriviaCommand extends Command {
       var w = fs.writeFileSync('resources/music/musictrivia.json', jsonSongs);
 
       const videoEmbed = new Discord.MessageEmbed()
-        .setThumbnail('https://cdn.iconscout.com/icon/free/png-256/music-859-459997.png')
         .setColor('#0099ff')
         .setTitle("Song added to Music Trivia!")
         .setDescription("**" + nartist + " - " + nsongname + "**")
+        .setFooter(`Added by ${message.author.username}`, message.author.avatarURL('webp', false, 16))
         .setTimestamp();
       message.channel.send(videoEmbed);
 

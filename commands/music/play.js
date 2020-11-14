@@ -117,10 +117,9 @@ module.exports = class PlayCommand extends Command {
         message.say('There was a problem getting the video you provided!');
         return;
       });
-      // // can be uncommented if you don't want the bot to play live streams
-      // if (video.raw.snippet.liveBroadcastContent === 'live') {
-      //   return message.say("I don't support live streams!");
-      // }
+      if (video.raw.snippet.liveBroadcastContent === 'live') {
+        return message.say("I don't support live streams!");
+      }
       // // can be uncommented if you don't want the bot to play videos longer than 1 hour
       // if (video.duration.hours !== 0) {
       //   return message.say('I cannot play videos longer than 1 hour');
@@ -194,11 +193,10 @@ module.exports = class PlayCommand extends Command {
         youtube
           .getVideoByID(videos[videoIndex - 1].id)
           .then(function(video) {
-            // // can be uncommented if you don't want the bot to play live streams
-            // if (video.raw.snippet.liveBroadcastContent === 'live') {
-            //   songEmbed.delete();
-            //   return message.say("I don't support live streams!");
-            // }
+            if (video.raw.snippet.liveBroadcastContent === 'live') {
+              songEmbed.delete();
+              return message.say("I don't support live streams!");
+            }
 
             // // can be uncommented if you don't want the bot to play videos longer than 1 hour
             // if (video.duration.hours !== 0) {
