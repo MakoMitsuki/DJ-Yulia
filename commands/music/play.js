@@ -269,7 +269,7 @@ module.exports = class PlayCommand extends Command {
             dispatcher.setVolume(message.guild.musicData.volume);
             const videoEmbed = new MessageEmbed()
               .setThumbnail(queue[0].thumbnail)
-              .setColor('#e9f931')
+              .setColor('#515070')
               .addField('Now Playing:', queue[0].title)
               .addField('Duration:', queue[0].duration)
               .setFooter(

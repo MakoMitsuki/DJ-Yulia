@@ -36,7 +36,7 @@ module.exports = class NowPlayingCommand extends Command {
 
     const videoEmbed = new MessageEmbed()
       .setThumbnail(video.thumbnail)
-      .setColor('#e9f931')
+      .setColor('#e79e4f')
       .setTitle(title)
       .setDescription(description);
     message.channel.send(videoEmbed);

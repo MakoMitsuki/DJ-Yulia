@@ -4,6 +4,7 @@ const ytdl = require('ytdl-core');
 const fs = require('fs');
 const { prefix } = require('../../config.json');
 const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
+const stringSimilarity = require('string-similarity');
 
 module.exports = class MusicTriviaCommand extends Command {
   constructor(client) {
@@ -115,7 +116,9 @@ module.exports = class MusicTriviaCommand extends Command {
               return;
             if (msg.content.startsWith(prefix)) return;
             // if user guessed song name
-            if (msg.content.toLowerCase().replace(regex, '') === queue[0].title.toLowerCase().replace(regex, '')) {
+            if (
+              compareCriteria(msg.content.toLowerCase().replace(regex, ''), queue[0].title.toLowerCase().replace(regex, ''))
+            ) {
               if (songNameFound) return; // if song name already found
               songNameFound = true;
 
@@ -138,7 +141,7 @@ module.exports = class MusicTriviaCommand extends Command {
             }
             // if user guessed singer
             else if (
-              msg.content.toLowerCase().replace(regex, '') === queue[0].singer.toLowerCase().replace(regex, '')
+              compareCriteria(msg.content.toLowerCase().replace(regex, ''), queue[0].singer.toLowerCase().replace(regex, ''))
             ) {
               if (songSingerFound) return;
               songSingerFound = true;
@@ -191,6 +194,9 @@ module.exports = class MusicTriviaCommand extends Command {
               return collector.stop();
             } else {
               // wrong answer
+              // debug
+              console.log("SINGER: " + stringSimilarity.compareTwoStrings(msg.content.toLowerCase().replace(regex, ''), queue[0].singer.toLowerCase().replace(regex, '')));
+              console.log("SONG: " + stringSimilarity.compareTwoStrings(msg.content.toLowerCase().replace(regex, ''), queue[0].title.toLowerCase().replace(regex, '')));
               return msg.react('❌');
             }
           });
@@ -300,10 +306,16 @@ module.exports = class MusicTriviaCommand extends Command {
     }
     return leaderBoard;
   }
+
   // https://www.w3resource.com/javascript-exercises/javascript-string-exercise-9.php
   static capitalize_Words(str) {
     return str.replace(/\w\S*/g, function(txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
   }
+
+  static compareCriteria(ans, correct) {
+    return stringSimilarity.compareTwoStrings(ans, correct) >= 0.7;
+  }
+
 };
