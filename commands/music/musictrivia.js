@@ -265,19 +265,6 @@ module.exports = class MusicTriviaCommand extends Command {
             message.guild.me.voice.channel.leave();
             return;
           }
-        })
-        .on('error', function() {
-          message.guild.triviaData.triviaQueue.length = 0;
-          message.guild.triviaData.wasTriviaEndCalled = true;
-          message.guild.triviaData.triviaScore.clear();
-          message.guild.musicData.songDispatcher.end();
-          let tee = new MessageEmbed()
-              .setColor('#FF0000')
-              .setAuthor('DJ Yulia')
-              .setTitle(`Error!`)
-              .setDescription(`There was an error with the music trivia song, so this round music trivia is being stopped. This is not supposed to happen! Contact michanpyon#0610 `)
-              .setTimestamp();
-          return tee;
         });
     });
   }
