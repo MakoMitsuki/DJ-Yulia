@@ -6,8 +6,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "pretest": "eslint --ignore-path .gitignore .",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "clean-commando": "npm uninstall --save discord.js-commando",
     "install-commando": "npm install --save https://github.com/discordjs/Commando.git"
   },
